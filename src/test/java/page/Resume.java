@@ -27,7 +27,7 @@ public class Resume {
 	By logo1=By.xpath("/html/body/header/div/div[1]/a/svg");
 	By logo=By.xpath("/html/body/header/div/div[1]/a");
 	By try_res_builder=By.xpath("/html/body/section[1]/div[1]/a");
-	By create_resume_now=By.xpath("/html/body/main/section[1]/div/div/div/div/div[1]/a");
+	By create_resume_now=By.xpath("/html/body/main/section[1]/div/div/div/div/section/a");
 	By resume=By.xpath("//*[@id=\"content\"]/div[3]/div/div[2]/div[1]/div/div[2]/div");
 	By choose_template=By.xpath("//*[@id=\"use_this_template_btn\"]");
 	By choose_later=By.xpath("//*[@id=\"skipTemplates\"]");
@@ -36,6 +36,7 @@ public class Resume {
 	By create_new_resume=By.xpath("/html/body/div[3]/div/div/div/div[3]/button[1]");
 	By upload_photo=By.xpath("//*[@id=\"content\"]/div[2]/div[1]/div/div/button");
 	By upload_photo2=By.xpath("/html/body/div[4]/div/div/div/section/div/div[1]/div[1]/div/div[1]/span");
+	By upload00=By.xpath("/html/body/div[4]/div/div/div/section/div[2]/div[2]/button[1]");
 	By next_workhistory=By.xpath("//*[@id=\"content\"]/div[3]/button[1]");
 	By email=By.xpath("//*[@id=\"EMAI\"]");
 	By tools=By.xpath("/html/body/header/div/div[2]/nav/ul/li[1]/span");
@@ -59,6 +60,8 @@ public class Resume {
 	By pass_1=By.id("widget-user-password");
 	By sign_in=By.xpath("//*[@id=\"btnSignIn\"]");
 	By home=By.xpath("https://zety.com/");
+	By hw01=By.xpath("/html/body/div[4]/section[4]/div/div/a");
+	By log=By.xpath("/html/body/header/div/div[2]/a");
 	
 	
 	public Resume(WebDriver driver)
@@ -69,9 +72,6 @@ public class Resume {
 	public void home() 
 		{
 		driver.navigate(). to("https://zety.com");
-		
-
-		
 		}
 	public void logodisplay()
 	{
@@ -112,10 +112,10 @@ public class Resume {
 	
 	public void upload() throws Exception{
 		{
-			driver.findElement(By.xpath("//*[@id=\"content\"]/div[2]/div[1]/div/div/button")).click();
-			driver.findElement(By.xpath("/html/body/div[4]/div/div/div/section/div/div[1]/div[1]/div/div[1]/span")).click();
+			driver.findElement(upload_photo).click();
+			driver.findElement(upload_photo2).click();
 			fileUpload("\"C:\\Users\\Merin\\Downloads\\desktop-wallpaper-aesthetic-background-laptop-aesthetic-cartoon.jpg\"");
-			driver.findElement(By.xpath("/html/body/div[4]/div/div/div/section/div[2]/div[2]/button[1]")).click();
+			driver.findElement(upload00).click();
 		}
 	}
 	private void fileUpload(String p)  throws AWTException
@@ -174,7 +174,7 @@ public class Resume {
 	public void screenshot() throws IOException
 	{
 		File src=(((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE));
-		FileHandler.copy(src, new File("C:\\sample\\scrnsht\\sky.png"));
+		FileHandler.copy(src, new File("C:\\sample\\scrnsht\\avatar.png"));
 	}	
 	public void mouseover()
 	{
@@ -210,7 +210,7 @@ public class Resume {
 			
 			//String actualurl=driver.getCurrentUrl();
 			//System.out.println(actualurl);
-//			driver.close();
+			driver.close();
 
 		}
 	}
@@ -218,7 +218,7 @@ public class Resume {
 	public void handlewindow()
 	{
 	//driver.findElement(By.xpath("/html/body/section[1]/div[1]/a")).click();	
-	 driver.findElement(By.xpath("/html/body/div[4]/section[4]/div/div/a")).click();
+	 driver.findElement(hw01).click();
 		String parentWindow=driver.getWindowHandle(); 
 		/*driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 		JavascriptExecutor js=(JavascriptExecutor) driver;
@@ -234,6 +234,7 @@ public class Resume {
 				driver.switchTo().window(handle);
 				driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 				driver.close();
+
 			}
 		}
 		
@@ -244,7 +245,7 @@ public class Resume {
 	public void login()
 	{
 		String parentWindow=driver.getWindowHandle();
-		driver.findElement(By.xpath("/html/body/header/div/div[2]/a")).click();
+		driver.findElement(log).click();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
 		Set<String>childwindows=driver.getWindowHandles();
 		for(String handles:childwindows)
@@ -253,6 +254,6 @@ public class Resume {
 			{
 				driver.switchTo().window(handles);
 			}
-		}	
+		}
 	}	
 }
